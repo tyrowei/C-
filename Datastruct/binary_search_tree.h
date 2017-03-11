@@ -52,7 +52,7 @@ public:
 
 private:
 	//给外部接口调用的内部接口
-	Delete(BSNode *root);
+	void Destroy(BSNode *root);
 	bool Contains(const int &val, BSNode *node) const;
 	const int &FindMax(BSNode *node) const;
 	const int &FindMin(BSNode *node) const;
@@ -74,7 +74,17 @@ BinarySearchTree::BinarySearchTree()
 
 BinarySearchTree::~BinarySearchTree()
 {
-	Delete(m_root);
+	Destroy(m_root);
+}
+
+BinarySearchTree::BinarySearchTree(const BinarySearchTree &rhs)
+{
+
+}
+
+BinarySearchTree &BinarySearchTree::operator = (const BinarySearchTree &rhs)
+{
+
 }
 
 bool BinarySearchTree::IsEmpty() const
@@ -153,6 +163,11 @@ void BinarySearchTree::Insert(const int &val, BSNode *node)
 	}
 }
 
+void BinarySearchTree::Remove(const int &val, BSNode *node)
+{
+
+}
+
 void BinarySearchTree::PreorderPrintTree(BSNode* node)
 {
 	if (node)
@@ -183,5 +198,19 @@ void BinarySearchTree::PostorderPrintTree(BSNode* node)
 	}
 }
 
+void BinarySearchTree::Destroy(BSNode *root)
+{
+	if (root->left != NULL)
+	{
+		Destroy(root->left);
+	}
+	if (root->right != NULL)
+	{
+		Destroy(root->right);
+	}
+
+	delete(root);
+	root = NULL;
+}
 
 #endif  /*BINARYSEARCHTREE_H__*/
