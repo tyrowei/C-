@@ -6,6 +6,7 @@
 C++
 Python
 PHP
+Shell
 
 数据结构
 算法
