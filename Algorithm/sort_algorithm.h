@@ -237,14 +237,14 @@ static int MergeSort(vector<_Tp> &arr)
 ** 堆排序
 ** arr[beg]以这个节点为根的子树，BuildMaxHeap后变成大堆
 */
+#define GET_CHILD(beg) (2 * beg + 1)
 template<typename _Tp>
-static int BuildMaxHeap(vector<_Tp> &arr, long beg, long end)
+static int BuildMaxHeap(vector<_Tp> &arr, int beg, int end)
 {
-	long child = 2 * beg + 1;
+	int child = 0;
 	_Tp tmp;
-	for (tmp = arr[beg]; child < end; beg = child)
+	for (tmp = arr[beg]; (child = GET_CHILD(beg)) < end; beg = child)
 	{
-		child = 2 * beg + 1;
 		if (child < end - 1 && arr[child] < arr[child + 1])
 		{
 			++child;
@@ -265,13 +265,13 @@ static int BuildMaxHeap(vector<_Tp> &arr, long beg, long end)
 template<typename _Tp>
 static int HeapSort(vector<_Tp> &arr)
 {
-	size_t length = arr.size();
-	for (long i = length / 2; i >= 0; --i)
+	int length = arr.size();
+	for (int i = length / 2; i >= 0; --i)
 	{
 		BuildMaxHeap(arr, i, length);
 	}
 
-	for (long i = length - 1; i >= 0; --i)
+	for (int i = length - 1; i >= 0; --i)
 	{
 		Swap(arr, 0, i);
 		BuildMaxHeap(arr, 0, i);
